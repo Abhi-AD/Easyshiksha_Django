@@ -1,9 +1,15 @@
 from django.shortcuts import HttpResponse
+from music.models import Albume
 
 
 # Create your views here.
 def index(request):
-    return HttpResponse("<h1>This is a music app in home</h1>")
+    all_albums = Albume.objects.all()  # Use Album instead of Albume
+    html = ""
+    for album in all_albums:
+        url = f"/music/{album.id}/"
+        html += f'<a href="{url}">{album.albume_title}</a></br>'
+    return HttpResponse(html)
 
 
 def albume_details(request, albume_id):
