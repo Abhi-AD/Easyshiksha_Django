@@ -3,3 +3,4 @@ from music.models import Albume, Song
 
 # Register your models here.
 admin.site.register(Albume)
+admin.site.register(Song)

@@ -1,1 +1,10 @@
-{{ albume }}
+<img src="{{ albume.albume_logo }}" alt="" />
+
+<h1>{{ albume.albume_title }}</h1>
+<h3>{{ albume.artist }}</h3>
+
+<ul>
+  {% for song in albume.song_set.all %}
+    <li>{{ song.song_title }}- {{ song.file_type }}</li>
+  {% endfor %}
+</ul>
