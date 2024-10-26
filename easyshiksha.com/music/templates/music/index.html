@@ -2,11 +2,57 @@
 <link rel="stylesheet" type="text/css" href="{% static 'music/css/style.css' %}" />
 <script src="https://cdn.tailwindcss.com"></script>
 
-<nav class="bg-white border-gray-200">
+<nav class="bg-white border-gray-200 text-black">
   <div class="max-w-screen-3xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="{% url 'music:index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">Viberr</a>
+    <div class="flex md:order-2">
+      <button id="menu-toggle" type="button" class="inline-flex items-center p-2 justify-center text-sm text-gray-500 rounded-lg md:hidden" aria-controls="navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+        </svg>
+      </button>
+
+      <!-- Search Input -->
+      <form action="" method="get" class="relative">
+        <input type="text" name="q" placeholder="Search..." class="block p-2 rounded border border-gray-300 focus:border-blue-500 focus:outline-none" />
+        <button type="submit" class="absolute right-0 top-0 p-2 text-blue-600 hover:bg-blue-100 rounded-r-lg">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 20a9 9 0 100-18 9 9 0 000 18zM21 21l-4.35-4.35" />
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <div class="hidden w-full md:flex md:w-auto md:order-1" id="navbar-collapse">
+      <ul class="flex flex-col p-4 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
+        <li>
+          <a href="#" class="block py-2 px-3 text-black rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+        </li>
+        <li>
+          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
+
+<div id="mobile-menu" class="hidden">
+  <ul class="flex flex-col p-4 font-medium bg-white md:hidden">
+    <li>
+      <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-black dark:hover:bg-gray-700">Home</a>
+    </li>
+    <li>
+      <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-black dark:hover:bg-gray-700">About</a>
+    </li>
+    <li>
+      <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-black dark:hover:bg-gray-700">Services</a>
+    </li>
+  </ul>
+</div>
 
 {% if all_albums %}
   <h3>Here are all my albums:</h3>
@@ -18,5 +64,14 @@
     {% endfor %}
   </ul>
 {% else %}
-  <h2>You don't have any albume</h2>
+  <h2>You don't have any albums</h2>
 {% endif %}
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle')
+  const mobileMenu = document.getElementById('mobile-menu')
+  
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden')
+  })
+</script>
