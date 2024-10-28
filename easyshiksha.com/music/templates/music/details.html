@@ -14,7 +14,7 @@
     </p>
   {% endif %}
 
-  <form action="{% url 'music:favorite' albume.id %}" method="post">
+  {% comment %} <form action="{% url 'music:favorite' albume.id %}" method="post">
     {% csrf_token %}
     {% for song in albume.song_set.all %}
       <input type="radio" id="song {{ forloop.counter }}" name="song" value="{{ song.id }}" />
@@ -26,5 +26,5 @@
       </label><br />
     {% endfor %}
     <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Favorite</button>
-  </form>
+  </form> {% endcomment %}
 {% endblock %}
