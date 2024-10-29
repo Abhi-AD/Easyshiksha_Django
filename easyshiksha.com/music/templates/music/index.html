@@ -3,13 +3,18 @@
 {% block content %}
   {% if all_albums %}
     <h3>Here are all my albums:</h3>
-    <ul>
-      {% for albums in all_albums %}
-        <li>
-          <a href="{% url 'music:albume_details' albums.id %}">{{ albums.albume_title }}</a>
-        </li>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {% for album in all_albums %}
+        <div class="max-w-sm bg-white border">
+          <a href="{% url 'music:albume_details' album.id %}"><img class="rounded-t-lg w-full h-48 object-cover" src="{{ album.albume_logo }}" alt="{{ album.album_title }}" /></a>
+          <div class="p-5">
+            <a href="{% url 'music:albume_details' album.id %}"><h5 class="">{{ album.albume_title }}</h5></a>
+            <p class="mb-3 font-normal text-blue-600 dark:text-gray-400">{{ album.genre }}</p>
+            <a href="{% url 'music:albume_details' album.id %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Read more</a>
+          </div>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
   {% else %}
     <h2>You don't have any albums</h2>
   {% endif %}
