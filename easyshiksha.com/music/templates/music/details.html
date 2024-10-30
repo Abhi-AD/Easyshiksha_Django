@@ -3,7 +3,42 @@
   Ablume Details
 {% endblock %}
 {% block content %}
-  <img src="{{ albume.albume_logo }}" alt="" />
+  <div class="flex flex-col md:flex-row items-start gap-6 p-4 md:p-6 bg-gray-100 min-h-screen">
+    <!-- Card -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-96 mb-4 md:mb-0">
+      <img src="{{ albume.albume_logo }}" alt="{{ albume.albume_title }}" class="w-full h-48 object-cover" />
+      <div class="p-4">
+        <h2 class="text-lg md:text-xl font-semibold">{{ albume.albume_title }}</h2>
+        <p class="text-gray-600">{{ albume.artist }}</p>
+      </div>
+    </div>
+
+    <!-- Controls & Table -->
+    <div class="flex-1 w-full">
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full md:w-auto">View All</button>
+        <button class="text-blue-600 hover:underline w-full md:w-auto">Add New Song</button>
+      </div>
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="px-4 md:px-6 py-4">
+          <h3 class="text-lg md:text-xl font-semibold">All Songs</h3>
+        </div>
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Title</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Audio File</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Favorite</th>
+              <th class="px-4 md:px-6 py-3 text-left text-xs md:text-sm font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} <img src="{{ albume.albume_logo }}" alt="" />
 
   <h1>{{ albume.albume_title }}</h1>
   <h3>{{ albume.artist }}</h3>
@@ -12,7 +47,7 @@
     <p>
       <strong>{{ error_message }}</strong>
     </p>
-  {% endif %}
+  {% endif %} {% endcomment %}
 
   {% comment %} <form action="{% url 'music:favorite' albume.id %}" method="post">
     {% csrf_token %}
