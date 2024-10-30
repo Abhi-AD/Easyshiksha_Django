@@ -10,7 +10,24 @@
           <div class="p-5">
             <a href="{% url 'music:albume_details' album.id %}"><h5 class="">{{ album.albume_title }}</h5></a>
             <p class="mb-3 font-normal text-blue-600 dark:text-gray-400">{{ album.genre }}</p>
-            <a href="{% url 'music:albume_details' album.id %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Read more</a>
+            <div class="flex items-center space-x-2">
+              <a href="{% url 'music:albume_details' album.id %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Read more</a>
+              <form action="{% url 'music:albume_delete' album.id %}" method="post" class="inline">
+                {% csrf_token %}
+                <input type="hidden" name="album_id" value="{{ album.id }}" />
+                <button type="submit" class="text-red-600 focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4v16a2 2 0 002 2h8a2 2 0 002-2V4M4 4h16M10 4v0m0 0h4m-4 0h4m-2 0v2m0 0v2" />
+                  </svg>
+                </button>
+              </form>
+
+              <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-yellow-500 hover:text-yellow-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 17.27l5.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       {% endfor %}
